@@ -15,7 +15,6 @@ public class RestClientController {
 
     @GetMapping("/instance")
     public String getInstance(){
-        RestClient restClient =RestClient.create();
         return providerRestClient.getInstanceInfo();
     }
 }

@@ -1,6 +1,7 @@
 package com.example.consumer.resttemplate;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,9 +9,11 @@ import org.springframework.web.client.RestTemplate;
 @RequiredArgsConstructor
 public class RestTemplateClient {
     private final RestTemplate restTemplate;
-    private final String PROVIDER_URL = "http://localhost:8081";
+    
+    @Value("${producer.service.url}")
+    private String producerServiceUrl;
 
     public String getInstanceOf(){
-        return restTemplate.getForObject(PROVIDER_URL+"/instance-info",String.class);
+        return restTemplate.getForObject(producerServiceUrl+"/instance-info",String.class);
     }
 }

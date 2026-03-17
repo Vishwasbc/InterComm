@@ -1,20 +1,21 @@
-package com.example.consumer.restclient;
+package com.example.consumer.webclient;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.client.RestClient;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-public class RestClientConfig {
+public class WebClientConfig {
     
     @Value("${producer.service.url}")
     private String producerServiceUrl;
     
-    @Bean
-    public RestClient restClient(RestClient.Builder builder) {
-        return builder
+    @Bean("producerWebClient")
+    public WebClient producerWebClient() {
+        return WebClient.builder()
                 .baseUrl(producerServiceUrl)
                 .build();
     }
 }
+
